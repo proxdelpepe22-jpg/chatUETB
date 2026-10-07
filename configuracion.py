@@ -1,21 +1,24 @@
-# configuracion.py
-
 import os
 from dotenv import load_dotenv
 
-# Cargar las variables del archivo .env
 load_dotenv()
 
-# Nombre del chatbot
 NOMBRE_CHATBOT = "chatUETB"
 
-# Zona horaria de Ecuador
 ZONA_HORARIA = "America/Guayaquil"
 
-# API del clima
-OPENWEATHER_API_KEY = os.getenv("OPENWEATHER_API_KEY")
+# Obtener la API Key de Streamlit o del archivo .env
+try:
+    import streamlit as st
 
-# Ciudad predeterminada
+    if "OPENWEATHER_API_KEY" in st.secrets:
+        OPENWEATHER_API_KEY = st.secrets["OPENWEATHER_API_KEY"]
+    else:
+        OPENWEATHER_API_KEY = os.getenv("OPENWEATHER_API_KEY")
+
+except Exception:
+    OPENWEATHER_API_KEY = os.getenv("OPENWEATHER_API_KEY")
+
 CIUDAD_DEFAULT = "Machala"
 
 # Configuración de la interfaz
